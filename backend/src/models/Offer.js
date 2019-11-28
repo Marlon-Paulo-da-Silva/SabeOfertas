@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 
 const OfferSchema = new mongoose.Schema({
   thumbnail: String,
-  local: String,
-  types: [String],
-  productName: String,
-  company: String,
   price: Number,
+  local: String,
+  category: [String],
+  company: String,
+  description: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User
+    ref: "User"
   }
 });
 
-module.exports = mongoose.model("Offer", UserSchema);
+module.exports = mongoose.model("Offer", OfferSchema);

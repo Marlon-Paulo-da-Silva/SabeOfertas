@@ -1,14 +1,8 @@
 # SabeOfertas
 
-## TO-DO list do projeto
+#### -> Esse Projeto ainda esta em andamento..
 
-### Criando Backend - Em andamento..
-
-### Frontend - Para Fazer
-
-### Mobile - Para Fazer
-
-## Sobre o Projeto
+### _Sobre o Projeto_
 
 A ideia do APP é:
 

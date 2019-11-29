@@ -4,7 +4,7 @@ const OfferSchema = new mongoose.Schema({
   thumbnail: String,
   price: Number,
   local: String,
-  category: [String],
+  categories: [String],
   company: String,
   description: String,
   user: {

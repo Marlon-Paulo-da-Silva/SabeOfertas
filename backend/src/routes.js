@@ -10,6 +10,7 @@ const routes = express.Router();
 const upload = multer(uploadConfig);
 
 routes.post("/sessions", SessionController.store);
+routes.get("/offers", OfferController.index);
 routes.post("/offers", upload.single("thumbnail"), OfferController.store);
 
 module.exports = routes;

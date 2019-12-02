@@ -5,7 +5,11 @@ const StoreSchema = mongoose.Schema({
   companyName: String,
   description: String,
   address: String,
-  city: String
+  city: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 module.exports = mongoose.model("Store", StoreSchema);

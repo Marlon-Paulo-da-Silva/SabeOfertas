@@ -5,6 +5,7 @@ const uploadConfig = require("./config/upload");
 const SessionController = require("./controllers/SessionController");
 const OfferController = require("./controllers/OfferController");
 const DashboardProfileController = require("./controllers/DashboardProfileController");
+const StoreController = require("./controllers/StoreController");
 
 const routes = express.Router();
 
@@ -17,4 +18,5 @@ routes.post("/offers", upload.single("thumbnail"), OfferController.store);
 
 routes.get("/dashboardprofile", DashboardProfileController.show);
 
+routes.post("/stores", upload.single("companyPicture"), StoreController.store);
 module.exports = routes;

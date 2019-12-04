@@ -19,8 +19,6 @@ function App() {
     const latLng = await getLatLng(results[0]);
     setCoordinates(latLng);
     setAddress(value);
-    console.log(value);
-    console.log(results);
   };
 
   return (
@@ -46,17 +44,25 @@ function App() {
             }) => (
               <div>
                 <input
-                  {...getInputProps({ placeholder: "Digite o endereço" })}
+                  {...getInputProps({
+                    placeholder: "Digite o endereço",
+                    className: "location-search-input"
+                  })}
                 />
                 <div>
                   {loading ? <div>...loading</div> : null}
                   {suggestions.map(suggestion => {
                     const style = {
-                      backgroundColor: suggestion.active ? "#591259" : "#fff"
+                      backgroundColor: suggestion.active ? "#59125941" : "#fff"
                     };
 
                     return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
+                      <div
+                        {...getSuggestionItemProps(suggestion, {
+                          style,
+                          className: "inputSuggestion"
+                        })}
+                      >
                         {suggestion.description}
                       </div>
                     );
@@ -65,6 +71,7 @@ function App() {
               </div>
             )}
           </PlacesAutocomplete>
+          <button className="btn-search">Pesquisar</button>
         </form>
       </div>
     </div>

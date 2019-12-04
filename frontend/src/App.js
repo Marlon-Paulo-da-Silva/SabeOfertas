@@ -18,7 +18,8 @@ function App() {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     setCoordinates(latLng);
-    setAddress(value);
+    await setAddress(value);
+    return alert("Voce esta pesquisando promoções em " + address);
   };
 
   return (
@@ -45,7 +46,7 @@ function App() {
               <div>
                 <input
                   {...getInputProps({
-                    placeholder: "Digite o endereço",
+                    placeholder: "Digite o endereço da sua localização",
                     className: "location-search-input"
                   })}
                 />
@@ -71,7 +72,9 @@ function App() {
               </div>
             )}
           </PlacesAutocomplete>
-          <button className="btn-search">Pesquisar</button>
+          {/* <button className="btn-search" onClick={handleSelect()}>
+            Pesquisar
+          </button> */}
         </form>
       </div>
     </div>

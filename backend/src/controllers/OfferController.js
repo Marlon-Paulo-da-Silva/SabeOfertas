@@ -19,7 +19,9 @@ module.exports = {
     const { city } = req.query;
 
     const offers = await Offer.find({
-      city: city
+      // city: "/" + city + "$/"
+      // city: cityFind
+      city: new RegExp(city + "$")
     });
 
     return res.json(offers);

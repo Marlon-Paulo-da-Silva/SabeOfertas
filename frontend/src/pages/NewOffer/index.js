@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styles from "./styles.css";
 
 import PlacesAutocomplete, {
@@ -9,7 +9,7 @@ import PlacesAutocomplete, {
 import camera from "../../assets/camera.svg";
 
 export default function NewOffer() {
-  const [company, setCompany] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
 
   const [address, setAddress] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -23,6 +23,10 @@ export default function NewOffer() {
     lng: null
   });
 
+  const preview = useMemo(() => {
+    return thumbnail ? URL.createObjectURL(thumbnail) : null;
+  }, [thumbnail]);
+
   const handleSelect = async value => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
@@ -34,8 +38,15 @@ export default function NewOffer() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label id="thumbnail">
-        <input type="file" />
+      <label
+        id="thumbnail"
+        style={{ backgroundImage: `url(${preview})` }}
+        className={thumbnail ? "has-thumbnail" : ""}
+      >
+        <input
+          type="file"
+          onChange={event => setThumbnail(event.target.files[0])}
+        />
         <img src={camera} alt="Select img" />
       </label>
       <label htmlFor="productName">Qual o Nome do Produto? *</label>

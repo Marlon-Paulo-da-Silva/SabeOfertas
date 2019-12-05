@@ -1,5 +1,7 @@
 import React from "react";
 
 export default function NewOffer() {
-  return <div />;
+  function handleSubmit() {}
+
+  return <form onSubmit={handleSubmit}></form>;
 }

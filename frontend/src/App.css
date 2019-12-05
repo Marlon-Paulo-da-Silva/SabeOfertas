@@ -75,7 +75,18 @@ body, input, button {
   background: #591259;
   color: #fff;
   cursor: pointer;
-  margin-top: 10px;
+  margin: 10px 0px 10px 0px;
+  padding: 0px 10px;
+}
+
+.content button.btn-voltar {
+  background: #ffffff;
+  color: #591259;
+  border: solid #591259;
+}
+
+.content button.btn-voltar:hover {
+  color: #fff;
 }
 
 .content button:hover {

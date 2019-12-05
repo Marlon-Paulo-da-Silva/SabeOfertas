@@ -13,6 +13,7 @@ const upload = multer(uploadConfig);
 
 routes.post("/sessions", SessionController.store);
 
+routes.get("/offers", OfferController.show);
 routes.get("/offers", OfferController.index);
 routes.post("/offers", upload.single("thumbnail"), OfferController.store);
 

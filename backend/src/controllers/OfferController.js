@@ -10,6 +10,18 @@ module.exports = {
       city: city
     });
 
+    console.log(offers);
+
+    return res.json(offers);
+  },
+
+  async show(req, res) {
+    const { city } = req.query;
+
+    const offers = await Offer.find({
+      city: city
+    });
+
     return res.json(offers);
   },
 

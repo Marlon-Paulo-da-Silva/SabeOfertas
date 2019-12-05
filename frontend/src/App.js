@@ -11,7 +11,7 @@ import logo from "./assets/logosabeoferta.svg";
 
 function App() {
   const [address, setAddress] = React.useState("");
-  const [coordinates, setCoordinates] = React.useState({
+  const [coordinates, setCoordinates] = useState({
     lat: null,
     lng: null
   });
@@ -21,13 +21,12 @@ function App() {
     const latLng = await getLatLng(results[0]);
     setCoordinates(latLng);
     await setAddress(value);
-
-    console.log(latLng);
   };
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("Handle submit funcionando!!");
+
+    api.get("/offers", {});
   }
 
   return (

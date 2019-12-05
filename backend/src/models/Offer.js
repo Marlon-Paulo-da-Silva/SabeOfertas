@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const OfferSchema = new mongoose.Schema({
   thumbnail: String,
   price: Number,
-  local: String,
+  city: String,
   categories: [String],
-  company: String,
+  productName: String,
+  companyName: String,
   description: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,

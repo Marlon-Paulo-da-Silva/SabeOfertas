@@ -1,10 +1,18 @@
-const Store = require("../models/Store");
+const Company = require("../models/Company");
 const User = require("../models/User");
 
 module.exports = {
   async store(req, res) {
     const { filename } = req.file;
-    const { local, companyName, description, city, address } = req.body;
+    const {
+      local,
+      companyName,
+      description,
+      city,
+      address,
+      lat,
+      lng
+    } = req.body;
 
     const { user_id } = req.headers;
 
@@ -13,15 +21,17 @@ module.exports = {
     if (!user)
       return res.status(400).json({ error: "Faça Login para criar uma Loja" });
 
-    const store = await Store.create({
+    const company = await Company.create({
       user: user_id,
       companyPicture: req.filename,
       companyName,
       description,
       address,
-      city
+      city,
+      lat,
+      lng
     });
 
-    return res.json(store);
+    return res.json(company);
   }
 };

@@ -21,9 +21,11 @@ module.exports = {
     if (!user)
       return res.status(400).json({ error: "Faça Login para criar uma Loja" });
 
+    // return res.json("filename: " + filename);
+
     const company = await Company.create({
       user: user_id,
-      companyPicture: req.filename,
+      companyPicture: filename,
       companyName,
       description,
       address,

@@ -23,10 +23,14 @@ function App() {
     await setAddress(value);
   };
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    api.get("/offers", {});
+    const response = await api.get("/offers", {
+      city: address
+    });
+
+    console.log(response);
   }
 
   return (

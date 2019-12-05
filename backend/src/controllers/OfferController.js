@@ -27,6 +27,7 @@ module.exports = {
 
   async store(req, res) {
     const { filename } = req.file;
+    console.log(filename);
     const {
       companyName,
       city,
@@ -47,7 +48,7 @@ module.exports = {
 
     const offer = await Offer.create({
       user: user_id,
-      thumbnail: req.filename,
+      thumbnail: filename,
       companyName,
       city,
       productName,

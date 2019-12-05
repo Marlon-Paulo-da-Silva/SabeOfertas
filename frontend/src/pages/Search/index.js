@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import api from "../../services/api";
+// import api from "../../services/api";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -23,12 +23,12 @@ export default function Search({ history }) {
     setAddress(value);
   };
 
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
+    console.log(coordinates);
 
-    const response = await api.get(`/offers/?city=${address}`);
-
-    console.log(response.data);
+    localStorage.setItem("userAddress", address);
+    // localStorage.setItem("user_id", user);
 
     history.push("/home");
   }

@@ -9,6 +9,8 @@ const OfferSchema = new mongoose.Schema(
     productName: String,
     companyName: String,
     description: String,
+    lat: String,
+    lng: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"

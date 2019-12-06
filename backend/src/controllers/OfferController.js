@@ -36,7 +36,9 @@ module.exports = {
       description,
       productName,
       categories,
-      price
+      price,
+      lat,
+      lng
     } = req.body;
     const { user_id } = req.headers;
 
@@ -56,7 +58,9 @@ module.exports = {
       productName,
       description,
       categories: categories.split(",").map(cat => cat.trim()),
-      price
+      price,
+      lat,
+      lng
     });
 
     return res.json(offer);

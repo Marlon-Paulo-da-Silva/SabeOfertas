@@ -1,7 +1,8 @@
 # SabeOfertas
 
 #### -> Esse Projeto ainda esta em andamento..
-#### -> Confira como esta ficando a versao estatica [SabeOfertas - Estatico](https://frontsabeofertas-estatico.netlify.com/)
+
+#### -> Confira como esta ficando: [SabeOfertas]https://sabeofertas.netlify.com/)
 
 ### _Sobre o Projeto_
 

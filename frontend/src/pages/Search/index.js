@@ -28,6 +28,8 @@ export default function Search({ history }) {
     console.log(coordinates);
 
     localStorage.setItem("userAddress", address);
+    localStorage.setItem("findCoordinatesLat", coordinates.lat);
+    localStorage.setItem("findCoordinatesLng", coordinates.lng);
     // console.log(address);
     // localStorage.setItem("user_id", user);
 
@@ -61,7 +63,7 @@ export default function Search({ history }) {
                 })}
               />
               <div>
-                {loading ? <div>...loading</div> : null}
+                {loading ? <div>Procurando Localização...</div> : null}
                 {suggestions.map(suggestion => {
                   const style = {
                     backgroundColor: suggestion.active ? "#59125941" : "#fff"

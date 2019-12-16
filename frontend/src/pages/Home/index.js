@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import api from "../../services/api";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
+import ReactDependentScript from "react-dependent-script";
+
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -16,12 +18,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 // import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloseIcon from "@material-ui/icons/Close";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
+// import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 
 // import Drawer from "../../components/Drawer";
 // import Maps from "../../components/maps";
@@ -90,7 +88,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0
   }
 }));
-export default function Home() {
+export default function Home({ history }) {
   const findCoordinatesLat = localStorage.getItem("findCoordinatesLat");
   const findCoordinatesLng = localStorage.getItem("findCoordinatesLng");
   const numberLatSearch = parseFloat(findCoordinatesLat);
@@ -137,6 +135,13 @@ export default function Home() {
       const response = await api.get(`/offers/?city=${userAddress}`);
 
       setOffers(response.data);
+      console.log(response.data);
+      if (response.data.length == 0) {
+        alert(
+          "Não temos promoções nessa cidade, por favor tente Presidente Prudente - SP"
+        );
+        history.push("/");
+      }
       setCloneOffers(response.data);
 
       const listener = e => {
@@ -243,55 +248,61 @@ export default function Home() {
       </div>
       <div className="content-home">
         <div className="mapbox-background">
-          <ReactMapGL
-            {...viewport}
-            mapboxApiAccessToken="pk.eyJ1IjoibWFybG9ucGF1bG8iLCJhIjoiY2szdWo1NzZvMGVibTNlbXJkcTM5eGlvMCJ9.JKN3xy0S62kf8L1MqJWAHQ"
-            mapStyle="mapbox://styles/mapbox/streets-v11"
-            onViewportChange={viewport => {
-              setViewport(viewport);
-            }}
+          <ReactDependentScript
+            scripts={[
+              "https://maps.googleapis.com/maps/api/js?key=AIzaSyA8SNWyNNA1QDjQrKweLFcBVIFfPCFez4M&libraries=places"
+            ]}
           >
-            {offers.map(offer => (
-              <Marker
-                key={offer._id}
-                latitude={parseFloat(offer.lat)}
-                longitude={parseFloat(offer.lng)}
-              >
-                <button
-                  className="marker-btn"
-                  onClick={e => {
-                    e.preventDefault();
-                    setSelectedOffer(offer);
+            <ReactMapGL
+              {...viewport}
+              mapboxApiAccessToken="pk.eyJ1IjoibWFybG9ucGF1bG8iLCJhIjoiY2szdWo1NzZvMGVibTNlbXJkcTM5eGlvMCJ9.JKN3xy0S62kf8L1MqJWAHQ"
+              mapStyle="mapbox://styles/mapbox/streets-v11"
+              onViewportChange={viewport => {
+                setViewport(viewport);
+              }}
+            >
+              {offers.map(offer => (
+                <Marker
+                  key={offer._id}
+                  latitude={parseFloat(offer.lat)}
+                  longitude={parseFloat(offer.lng)}
+                >
+                  <button
+                    className="marker-btn"
+                    onClick={e => {
+                      e.preventDefault();
+                      setSelectedOffer(offer);
+                    }}
+                  >
+                    <img src={point} alt="point" />
+                  </button>
+                </Marker>
+              ))}
+
+              {selectedOffer ? (
+                <Popup
+                  latitude={parseFloat(selectedOffer.lat)}
+                  longitude={parseFloat(selectedOffer.lng)}
+                  onClose={() => {
+                    setSelectedOffer(null);
                   }}
                 >
-                  <img src={point} alt="point" />
-                </button>
-              </Marker>
-            ))}
-
-            {selectedOffer ? (
-              <Popup
-                latitude={parseFloat(selectedOffer.lat)}
-                longitude={parseFloat(selectedOffer.lng)}
-                onClose={() => {
-                  setSelectedOffer(null);
-                }}
-              >
-                <div>
-                  <img
-                    className="popup-thumb"
-                    width={240}
-                    src={selectedOffer.thumbnail_url}
-                    alt="thumbnail product"
-                  />
-                  <h3>{selectedOffer.productName}</h3>
-                  <p>{selectedOffer.description}</p>
-                  <p>{selectedOffer.companyName}</p>
-                  <span>{formataDinheiro(selectedOffer.price)}</span>
-                </div>
-              </Popup>
-            ) : null}
-          </ReactMapGL>
+                  <div>
+                    <img
+                      className="popup-thumb"
+                      width={240}
+                      src={selectedOffer.thumbnail_url}
+                      alt="thumbnail product"
+                    />
+                    <h3>{selectedOffer.productName}</h3>
+                    <p>{selectedOffer.description}</p>
+                    <p>{selectedOffer.companyName}</p>
+                    <span>{formataDinheiro(selectedOffer.price)}</span>
+                  </div>
+                </Popup>
+              ) : null}
+            </ReactMapGL>
+          </ReactDependentScript>
         </div>
       </div>
 

@@ -15,3 +15,23 @@ _"Facilitar a busca por ofertas em tempo real para pessoas que estão caminhando
 Esse projeto faz parte do meu portfolio pessoal, entao ficarei feliz caso você mandasse algum feedback.
 
 Eu estava caminhando no centro da minha cidade e pensei como poderia saber todas as promoções, sem precisar andar pelo calçadão todo.
+
+## Rodando localmente
+
+**Backend** (Node.js + Express + MongoDB)
+
+```bash
+cd backend
+cp .env.example .env   # preencha MONGO_URL
+yarn install
+yarn dev
+```
+
+**Frontend** (React + Vite)
+
+```bash
+cd frontend
+cp .env.example .env
+yarn install
+yarn dev
+```

@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const Offer = require("../models/Offer");
 
+const escapeRegExp = text => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 module.exports = {
   async index(req, res) {
     const { category, city } = req.query;
@@ -21,7 +23,7 @@ module.exports = {
     const offers = await Offer.find({
       // city: "/" + city + "$/"
       // city: cityFind
-      city: new RegExp(city + "$")
+      city: new RegExp(escapeRegExp(String(city || "")) + "$")
     });
 
     return res.json(offers);

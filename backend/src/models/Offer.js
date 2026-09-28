@@ -24,7 +24,7 @@ const OfferSchema = new mongoose.Schema(
 );
 
 OfferSchema.virtual("thumbnail_url").get(function() {
-  return `https://sabeofertas.herokuapp.com/files/${this.thumbnail}`;
+  return `${process.env.APP_URL || "http://localhost:3333"}/files/${this.thumbnail}`;
 });
 
 module.exports = mongoose.model("Offer", OfferSchema);
